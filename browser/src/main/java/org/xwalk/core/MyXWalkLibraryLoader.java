@@ -392,7 +392,16 @@ class MyXWalkLibraryLoader {
                 downloadDir = Environment.getExternalStorageDirectory();
                 showMessage("Please, make sure that SDCard is mounted");
             }
-
+            
+            if (downloadDir == null) { // no storage, try to use SDCard
+                downloadDir = new File("/mnt/usbdisk");
+                showMessage("MyXWalkLibraryLoader usbdisk:Please, make sure that SDCard is mounted");
+            }
+            if (downloadDir == null) { // no storage, try to use internal cache
+                downloadDir = context.getCachedir();
+               showMessage("MyXWalkLibraryLoader getCachedir:Please, make sure  Cachedir is mounted");
+            }
+            
             File downloadFile = new File(downloadDir, savedFile);
             if (downloadFile.isFile()) downloadFile.delete();
 
