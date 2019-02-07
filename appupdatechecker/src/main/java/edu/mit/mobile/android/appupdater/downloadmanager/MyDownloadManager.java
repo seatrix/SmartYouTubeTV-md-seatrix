@@ -163,10 +163,10 @@ public final class MyDownloadManager {
             cacheDir = new File("/mnt/usbdisk");
             MessageHelpers.showMessage(mContext,"MyDownloadManager usbdisk:Please, make sure that SDCard is mounted");
         }
-        if (cacheDir == null) { // no storage, try to use internal cache
-            cacheDir = mContext.getCachedir();
-            MessageHelpers.showMessage(mContext, "MyDownloadManager getCachedir:Please, make sure  Cachedir is mounted");
-        }
+       // if (cacheDir == null) { // no storage, try to use internal cache
+       //     cacheDir = mContext.getCachedir();
+       //     MessageHelpers.showMessage(mContext, "MyDownloadManager getCachedir:Please, make sure  Cachedir is mounted");
+       // }
         
         
         File outputFile = new File(cacheDir, "tmp_file");
