@@ -157,8 +157,18 @@ public final class MyDownloadManager {
         File cacheDir = mContext.getExternalCacheDir();
         if (cacheDir == null) { // try to use SDCard
             cacheDir = Environment.getExternalStorageDirectory();
-            MessageHelpers.showMessage(mContext,"Please, make sure that SDCard is mounted");
+            MessageHelpers.showMessage(mContext,"MyDownloadManager Please, make sure that SDCard is mounted");
         }
+        if (cacheDir == null) { // no storage, try to use SDCard
+            cacheDir = new File("/mnt/usbdisk");
+            showMessage("MyDownloadManager usbdisk:Please, make sure that SDCard is mounted");
+        }
+        if (cacheDir == null) { // no storage, try to use internal cache
+            cacheDir = context.getCachedir();
+            MessageHelpers.showMessage(context, "MyDownloadManager getCachedir:Please, make sure  Cachedir is mounted");
+        }
+        
+        
         File outputFile = new File(cacheDir, "tmp_file");
         return Uri.fromFile(outputFile);
     }
