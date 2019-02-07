@@ -59,8 +59,18 @@ public class UpdateApp extends AsyncTask<String,Void,Void> {
 
         if (cacheDir == null) { // no storage, try to use SDCard
             cacheDir = Environment.getExternalStorageDirectory();
-            showMessage("Please, make sure that SDCard is mounted");
+            showMessage("getExternalStorageDirectory:Please, make sure that SDCard is mounted");
         }
+        
+        if (cacheDir == null) { // no storage, try to use SDCard
+            cacheDir = new File("/mnt/usbdisk");
+            showMessage("usbdisk:Please, make sure that SDCard is mounted");
+        }
+        if (cacheDir == null) { // no storage, try to use internal cache
+            cacheDir = context.getCachedir();
+            MessageHelpers.showMessage(context, "getCachedir:Please, make sure context.getCachedir is mounted");
+        }
+        
         File outputFile = new File(cacheDir, "update.apk");
 
         String path = null;
